@@ -12,9 +12,11 @@ return new class () extends Migration {
     {
         Schema::create('states', function (Blueprint $table) {
             $table->id();
-            $table->string("acronym");
+            $table->string("acronym", 2)->unique();
             $table->string("name");
+            $table->string("ibge_code")->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

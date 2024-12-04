@@ -10,6 +10,7 @@ class State extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'ibge_code',
         'acronym',
         'name',
     ];
