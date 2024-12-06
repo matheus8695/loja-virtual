@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\{State};
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,12 @@ class AddressFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "zip_code"   => fake()->postcode(),
+            "city"       => fake()->city(),
+            "district"   => fake()->randomElement(['Centro', 'Maria Lucia', 'Gleba Palhano']),
+            "state_id"   => State::query()->inRandomOrder()->first("id"),
+            "number"     => fake()->numberBetween(0, 999),
+            "complement" => fake()->boolean() ? fake()->sentence(10) : null,
         ];
     }
 }

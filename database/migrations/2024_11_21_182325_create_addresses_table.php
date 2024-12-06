@@ -14,7 +14,6 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId("user_id")->constrained();
             $table->string("zip_code");
-            $table->string("state");
             $table->string("city");
             $table->string("district");
             $table->foreignId("state_id")->constrained();
