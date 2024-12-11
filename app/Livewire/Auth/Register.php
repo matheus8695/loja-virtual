@@ -4,23 +4,31 @@ namespace App\Livewire\Auth;
 
 use App\Models\User;
 use Illuminate\Contracts\View\View;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class Register extends Component
 {
-    public ?string $name;
+    #[Rule(['required', 'max:255'])]
+    public ?string $name = null;
 
-    public ?string $email;
+    #[Rule(['required', 'max:255', 'email', 'unique:users,email'])]
+    public ?string $email = null;
 
-    public ?string $email_confirmation;
+    #[Rule(['required'])]
+    public ?string $email_confirmation = null;
 
-    public ?string $password;
+    #[Rule(['required', 'min:6'])]
+    public ?string $password = null;
 
-    public ?string $document_id;
+    #[Rule(['required', 'size:11'])]
+    public ?string $document_id = null;
 
-    public ?string $phone_number;
+    #[Rule(['required', 'size:11'])]
+    public ?string $phone_number = null;
     
-    public ?string $gender;
+    #[Rule(['required', 'in:male,female,other'])]
+    public ?string $gender = null;
 
     public function render(): View
     {
@@ -29,6 +37,8 @@ class Register extends Component
 
     public function submit()
     {
+        $this->validate();
+        
         User::query()->create([
             "name" => $this->name,
             "email" => $this->email,
