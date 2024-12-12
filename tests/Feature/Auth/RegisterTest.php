@@ -56,15 +56,19 @@ describe('validations', function () {
             User::factory()->create(['email' => $field->value]);
         }
 
-        Livewire::test(Register::class)
-            ->set('email',$field->value)
-            ->call('submit')
-            ->assertHasErrors(['email' => $field->rule]);
+        $livewire = Livewire::test(Register::class)->set('email',$field->value);
+        
+        if (property_exists($field, 'aValue')) {
+            $livewire->set($field->aField, $field->aValue);
+        }
+
+        $livewire->call('submit')->assertHasErrors(['email' => $field->rule]);
+
     })->with([
         'required' => (object)['value' => '', 'rule' => 'required'],
         'max:255' => (object)['value' => str_repeat('*', 256), 'rule' => 'max'],
         'email' => (object)['value' => 'not-an-email', 'rule' => 'email'],
-        'unique' => (object)['value' => 'user@test.com', 'rule' => 'unique'],
+        'unique' => (object)['value' => 'user@test.com', 'rule' => 'unique', 'aField' => "email_confirmation", 'aValue' => 'user@test.com'],
     ]);
 
     /** PASSWORD */
