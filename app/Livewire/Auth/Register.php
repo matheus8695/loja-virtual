@@ -5,6 +5,7 @@ namespace App\Livewire\Auth;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -31,6 +32,7 @@ class Register extends Component
     #[Rule(['required', 'in:male,female,other'])]
     public ?string $gender = null;
 
+    #[Layout('components.layouts.guest')]
     public function render(): View
     {
         return view('livewire.auth.register');
