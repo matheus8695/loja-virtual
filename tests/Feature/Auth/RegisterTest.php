@@ -2,6 +2,7 @@
 
 use App\Livewire\Auth\Register;
 use App\Models\User;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
 
@@ -22,7 +23,8 @@ it('should be able to register a new', function () {
         ->set("phone_number", "43988232910")
         ->set("gender", "male")
         ->call("submit")
-        ->assertHasNoErrors();
+        ->assertHasNoErrors()
+        ->assertRedirect(route('dashboard'));
         
         assertDatabaseHas("users", [
             "name" => "user test",
