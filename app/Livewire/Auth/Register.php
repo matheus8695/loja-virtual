@@ -4,6 +4,7 @@ namespace App\Livewire\Auth;
 
 use App\Models\User;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -39,7 +40,7 @@ class Register extends Component
     {
         $this->validate();
         
-        User::query()->create([
+        $user = User::query()->create([
             "name" => $this->name,
             "email" => $this->email,
             "password" => $this->password,
@@ -47,5 +48,7 @@ class Register extends Component
             "phone_number" => $this->phone_number,
             "gender" => $this->gender
         ]);
+
+        Auth::login($user);
     }
 }

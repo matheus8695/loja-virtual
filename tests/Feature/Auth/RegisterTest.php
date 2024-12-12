@@ -2,6 +2,7 @@
 
 use App\Livewire\Auth\Register;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
 
 use function Pest\Laravel\assertDatabaseCount;
@@ -11,7 +12,7 @@ it("should render the component", function () {
     Livewire::test(Register::class)->assertOk();
 });
 
-it('should be able to register a new user', function () {
+it('should be able to register a new', function () {
     Livewire::test(Register::class)
         ->set("name", "user test")
         ->set("email", "user@test.com")
@@ -29,6 +30,10 @@ it('should be able to register a new user', function () {
         ]);
 
         assertDatabaseCount("users", 1);
+
+        expect(Auth::check())
+            ->and(Auth::user())
+            ->id->toBe(User::first()->id);
 });
 
 describe('validations', function () {
