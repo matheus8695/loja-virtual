@@ -3,6 +3,7 @@
 namespace App\Livewire\Auth;
 
 use App\Models\User;
+use App\Notifications\WelcomeNotification;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
@@ -52,6 +53,8 @@ class Register extends Component
         ]);
 
         Auth::login($user);
+        $user->notify(new WelcomeNotification);
+
         $this->redirect(route('dashboard'));
     }
 }

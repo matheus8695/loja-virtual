@@ -5,24 +5,14 @@
             <x-input label="Email" icon="o-envelope" wire:model="email" />
             <x-input label="Confirmar Email" icon="o-envelope" wire:model="email_confirmation" />
             <x-password label="Senha" clearable wire:model="password" />
-            <x-input 
-                label="CPF" 
-                icon="o-document" 
-                wire:model="document_id" 
-                oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
-                maxlength="11"
+            <x-input label="CPF" icon="o-document" wire:model="document_id" 
+                oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="11"
             />
-            <x-input 
-                label="Telefone" 
-                icon="o-phone" 
-                wire:model="phone_number" 
-                oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
-                maxlength="11"
+            <x-input label="Telefone" icon="o-phone" wire:model="phone_number" 
+                oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="11"
             />
-            <x-radio 
-                label="Gênero" 
-                :options="[['id' => 'male', 'name' => 'Masculino'], ['id' => 'female', 'name' => 'Feminino'], ['id' => 'other', 'name' => 'Outro']]" 
-                wire:model="gender" 
+            <x-radio label="Gênero" wire:model="gender" 
+                :options="[['id' => 'male', 'name' => 'Masculino'], ['id' => 'female', 'name' => 'Feminino'], ['id' => 'other', 'name' => 'Outro']]"
             />
         
             <x-slot:actions>
