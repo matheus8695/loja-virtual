@@ -29,7 +29,7 @@ class Register extends Component
 
     #[Rule(['required', 'size:11'])]
     public ?string $phone_number = null;
-    
+
     #[Rule(['required', 'in:male,female,other'])]
     public ?string $gender = null;
 
@@ -42,7 +42,7 @@ class Register extends Component
     public function submit()
     {
         $this->validate();
-        
+
         $user = User::query()->create([
             "name" => $this->name,
             "email" => $this->email,
@@ -53,7 +53,6 @@ class Register extends Component
         ]);
 
         Auth::login($user);
-        $user->notify(new WelcomeNotification);
 
         $this->redirect(route('dashboard'));
     }

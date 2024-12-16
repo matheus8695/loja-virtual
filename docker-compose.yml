@@ -48,11 +48,6 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
-    mailhog:
-        image: mailhog/mailhog
-        ports:
-          - "1025:1025"
-          - "8025:8025"
     redis:
         image: 'redis:alpine'
         ports:

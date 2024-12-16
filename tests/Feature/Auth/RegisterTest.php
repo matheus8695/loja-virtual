@@ -26,24 +26,24 @@ it('should be able to register a new', function () {
         ->call("submit")
         ->assertHasNoErrors()
         ->assertRedirect(route('dashboard'));
-        
-        assertDatabaseHas("users", [
-            "name" => "user test",
-            "email" => "user@test.com"
-        ]);
 
-        assertDatabaseCount("users", 1);
+    assertDatabaseHas("users", [
+        "name" => "user test",
+        "email" => "user@test.com"
+    ]);
 
-        expect(Auth::check())
-            ->and(Auth::user())
-            ->id->toBe(User::first()->id);
+    assertDatabaseCount("users", 1);
+
+    expect(Auth::check())
+        ->and(Auth::user())
+        ->id->toBe(User::first()->id);
 });
 
 describe('validations', function () {
     /** NAME */
     test('name rules', function ($field) {
         Livewire::test(Register::class)
-            ->set('name',$field->value)
+            ->set('name', $field->value)
             ->call('submit')
             ->assertHasErrors(['name' => $field->rule]);
     })->with([
@@ -57,14 +57,13 @@ describe('validations', function () {
             User::factory()->create(['email' => $field->value]);
         }
 
-        $livewire = Livewire::test(Register::class)->set('email',$field->value);
-        
+        $livewire = Livewire::test(Register::class)->set('email', $field->value);
+
         if (property_exists($field, 'aValue')) {
             $livewire->set($field->aField, $field->aValue);
         }
 
         $livewire->call('submit')->assertHasErrors(['email' => $field->rule]);
-
     })->with([
         'required' => (object)['value' => '', 'rule' => 'required'],
         'max:255' => (object)['value' => str_repeat('*', 256), 'rule' => 'max'],
@@ -75,7 +74,7 @@ describe('validations', function () {
     /** PASSWORD */
     test('password rules', function ($field) {
         Livewire::test(Register::class)
-            ->set('password',$field->value)
+            ->set('password', $field->value)
             ->call('submit')
             ->assertHasErrors(['password' => $field->rule]);
     })->with([
@@ -86,7 +85,7 @@ describe('validations', function () {
     /** DOCUMENT_ID */
     test('document_id rules', function ($field) {
         Livewire::test(Register::class)
-            ->set('document_id',$field->value)
+            ->set('document_id', $field->value)
             ->call('submit')
             ->assertHasErrors(['document_id' => $field->rule]);
     })->with([
@@ -97,7 +96,7 @@ describe('validations', function () {
     /** PHONE NUMBER */
     test('phone_number rules', function ($field) {
         Livewire::test(Register::class)
-            ->set('phone_number',$field->value)
+            ->set('phone_number', $field->value)
             ->call('submit')
             ->assertHasErrors(['phone_number' => $field->rule]);
     })->with([
@@ -108,7 +107,7 @@ describe('validations', function () {
     /** GENDER */
     test('gender rules', function ($field) {
         Livewire::test(Register::class)
-            ->set('gender',$field->value)
+            ->set('gender', $field->value)
             ->call('submit')
             ->assertHasErrors(['gender' => $field->rule]);
     })->with([
@@ -116,23 +115,3 @@ describe('validations', function () {
         'size:in:male,female,other' => (object)['value' => 'teste', 'rule' => 'in']
     ]);
 });
-
-it('should send a notification to new user', function () {
-    Notification::fake();
-
-    Livewire::test(Register::class)
-        ->set("name", "user test")
-        ->set("email", "user@test.com")
-        ->set("email_confirmation", "user@test.com")
-        ->set("password", "password")
-        ->set("document_id", "10410413900")
-        ->set("phone_number", "43988232910")
-        ->set("gender", "male")
-        ->call("submit");
-
-    $user = User::whereEmail('user@test.com')->first();
-    
-    Notification::assertSentTo($user, WelcomeNotification::class);
-});
-
-
