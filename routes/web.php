@@ -1,7 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\{Route};
+use App\Livewire\Auth;
+use App\Livewire\Welcome;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('auth')->group(function() {
+    Route::get("/dashboard", Welcome::class)->name('dashboard');
 });
+
+Route::get('/', Welcome::class);
+Route::get('/cadastrar', Auth\Register::class)->name('register');
