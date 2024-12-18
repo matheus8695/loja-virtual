@@ -2,9 +2,7 @@
 
 use App\Livewire\Auth\Register;
 use App\Models\User;
-use App\Notifications\WelcomeNotification;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
 use Livewire\Livewire;
 
 use function Pest\Laravel\assertDatabaseCount;
