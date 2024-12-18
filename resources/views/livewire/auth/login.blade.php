@@ -1,3 +1,5 @@
 <div>
-    {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
+    @error("invalidCredentials")
+        <span>{{ $message }}</span>
+    @enderror
 </div>
