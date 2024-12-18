@@ -5,8 +5,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
 
-use function Pest\Laravel\assertDatabaseCount;
-use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\{assertDatabaseCount, assertDatabaseHas};
 
 it("should render the component", function () {
     Livewire::test(Register::class)->assertOk();
@@ -26,8 +25,8 @@ it('should be able to register a new', function () {
         ->assertRedirect(route('dashboard'));
 
     assertDatabaseHas("users", [
-        "name" => "user test",
-        "email" => "user@test.com"
+        "name"  => "user test",
+        "email" => "user@test.com",
     ]);
 
     assertDatabaseCount("users", 1);
@@ -46,7 +45,7 @@ describe('validations', function () {
             ->assertHasErrors(['name' => $field->rule]);
     })->with([
         'required' => (object)['value' => '', 'rule' => 'required'],
-        'max:255' => (object)['value' => str_repeat('*', 256), 'rule' => 'max:255'],
+        'max:255'  => (object)['value' => str_repeat('*', 256), 'rule' => 'max:255'],
     ]);
 
     /** EMAIL */
@@ -64,9 +63,9 @@ describe('validations', function () {
         $livewire->call('submit')->assertHasErrors(['email' => $field->rule]);
     })->with([
         'required' => (object)['value' => '', 'rule' => 'required'],
-        'max:255' => (object)['value' => str_repeat('*', 256), 'rule' => 'max'],
-        'email' => (object)['value' => 'not-an-email', 'rule' => 'email'],
-        'unique' => (object)['value' => 'user@test.com', 'rule' => 'unique', 'aField' => "email_confirmation", 'aValue' => 'user@test.com'],
+        'max:255'  => (object)['value' => str_repeat('*', 256), 'rule' => 'max'],
+        'email'    => (object)['value' => 'not-an-email', 'rule' => 'email'],
+        'unique'   => (object)['value' => 'user@test.com', 'rule' => 'unique', 'aField' => "email_confirmation", 'aValue' => 'user@test.com'],
     ]);
 
     /** PASSWORD */
@@ -77,7 +76,7 @@ describe('validations', function () {
             ->assertHasErrors(['password' => $field->rule]);
     })->with([
         'required' => (object)['value' => '', 'rule' => 'required'],
-        'min:6' => (object)['value' => '*', 'rule' => 'min']
+        'min:6'    => (object)['value' => '*', 'rule' => 'min'],
     ]);
 
     /** DOCUMENT_ID */
@@ -88,7 +87,7 @@ describe('validations', function () {
             ->assertHasErrors(['document_id' => $field->rule]);
     })->with([
         'required' => (object)['value' => '', 'rule' => 'required'],
-        'size:11' => (object)['value' => '*', 'rule' => 'size']
+        'size:11'  => (object)['value' => '*', 'rule' => 'size'],
     ]);
 
     /** PHONE NUMBER */
@@ -99,7 +98,7 @@ describe('validations', function () {
             ->assertHasErrors(['phone_number' => $field->rule]);
     })->with([
         'required' => (object)['value' => '', 'rule' => 'required'],
-        'size:11' => (object)['value' => '*', 'rule' => 'size']
+        'size:11'  => (object)['value' => '*', 'rule' => 'size'],
     ]);
 
     /** GENDER */
@@ -109,7 +108,7 @@ describe('validations', function () {
             ->call('submit')
             ->assertHasErrors(['gender' => $field->rule]);
     })->with([
-        'required' => (object)['value' => '', 'rule' => 'required'],
-        'size:in:male,female,other' => (object)['value' => 'teste', 'rule' => 'in']
+        'required'                  => (object)['value' => '', 'rule' => 'required'],
+        'size:in:male,female,other' => (object)['value' => 'teste', 'rule' => 'in'],
     ]);
 });

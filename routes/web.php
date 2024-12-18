@@ -1,7 +1,6 @@
 <?php
 
-use App\Livewire\Auth;
-use App\Livewire\Welcome;
+use App\Livewire\{Auth, Welcome};
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
