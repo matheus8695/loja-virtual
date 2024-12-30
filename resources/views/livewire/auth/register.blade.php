@@ -16,8 +16,13 @@
             />
         
             <x-slot:actions>
-                <x-button label="Cancelar" type="reset" />
-                <x-button label="Cadastrar" class="btn-primary" type="submit" spinner="submit" />
+                <div class="w-full flex items-center justify-between">
+                    <a wire.navigate href="{{ route('login') }}" class="link link-primary">Já tenho uma conta!</a>
+                    <div>
+                        <x-button label="Cancelar" type="reset" />
+                        <x-button label="Cadastrar" class="btn-primary" type="submit" spinner="submit" />
+                    </div>
+                </div>
             </x-slot:actions>
         </x-form>
     </x-card>
