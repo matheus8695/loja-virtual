@@ -26,4 +26,11 @@ class AddressFactory extends Factory
             "complement" => fake()->boolean() ? fake()->sentence(10) : null,
         ];
     }
+
+    public function withUser(int $id): self
+    {
+        return $this->state(fn (array $attributes) => [
+            "user_id" => $id,
+        ]);
+    }
 }
