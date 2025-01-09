@@ -7,6 +7,10 @@ use Livewire\Livewire;
 use function Pest\Laravel\actingAs;
 
 it('should render the component', function () {
+    /** @var User $user */
+    $user = User::factory()->create();
+    actingAs($user);
+
     Livewire::test(Show::class)
         ->assertOk();
 });
