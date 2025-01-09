@@ -1,3 +1,4 @@
-<div>
-    {{-- The best athlete wants his opponent at his best. --}}
+<div class="flex flex-row items-center">
+    <livewire:user-profile.personal-data.show/>
+    <livewire:user-profile.address.show/>
 </div>
