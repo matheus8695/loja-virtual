@@ -2,6 +2,7 @@
 
 namespace App\Livewire\UserProfile\PersonalData;
 
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
@@ -15,7 +16,7 @@ class Show extends Component
     }
 
     #[Computed]
-    public function user()
+    public function user(): User
     {
         return Auth::user();
     }
