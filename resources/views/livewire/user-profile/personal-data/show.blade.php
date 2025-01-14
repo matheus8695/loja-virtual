@@ -1,7 +1,12 @@
 <div class="w-1/2">
     <x-card title="{{ $this->user->name }}" class="h-screen" separator>
         <x-slot:menu>
-            <x-button label="Alterar Dados" class="btn btn-outline btn-primary" @click="$dispatch('user::update', { id: {{ $this->user->id }} })" />
+            <x-button 
+                label="Alterar Dados" 
+                class="btn btn-outline btn-primary"
+                wire:key="btn-update-{{ $this->user->id }}"
+                wire:click="update('{{ $this->user->id  }}')"
+            />
         </x-slot:menu>
 
         <div class="flex flex-col space-y-4 w-2/3">
@@ -10,6 +15,7 @@
             <x-input label="Gênero" icon="o-user" value="{{ $this->user->gender }}" readonly/>
             <x-input label="Telefone" icon="o-phone" value="{{ $this->user->phone_number }}" readonly/>
         </div>
-
     </x-card>
+
+    <livewire:user-profile.personal-data.update/>
 </div>
