@@ -46,7 +46,7 @@
                     <x-menu-separator />
                 @endif
 
-                <x-menu-item title="Perfil" icon="o-user-circle" :link="route('user-profile.show')" />
+                <x-menu-item title="Perfil" icon="o-user-circle" :link="route('user-profile.index')" />
                 <x-menu-item title="Home" icon="o-home" :link="route('dashboard')" />
                 {{-- <x-menu-sub title="Settings" icon="o-cog-6-tooth">
                     <x-menu-item title="Wifi" icon="o-wifi" link="####" />

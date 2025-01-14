@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
 
-class Show extends Component
+class Index extends Component
 {
     #[On('user-profile::reload')]
     public function render(): View
     {
-        return view('livewire.user-profile.personal-data.show');
+        return view('livewire.user-profile.personal-data.index');
     }
 
     #[Computed]

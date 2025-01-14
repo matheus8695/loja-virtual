@@ -11,6 +11,6 @@ Route::middleware('auth')->group(function () {
     Route::get("/", Welcome::class)->name('dashboard'); // tela inicial com os produtos
 
     #profile
-    Route::get('/minha_conta', UserProfile\Show::class)->name('user-profile.show');
+    Route::get('/minha_conta', UserProfile\Index::class)->name('user-profile.index');
     #end profile
 });

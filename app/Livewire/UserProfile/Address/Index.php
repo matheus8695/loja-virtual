@@ -4,10 +4,10 @@ namespace App\Livewire\UserProfile\Address;
 
 use Livewire\Component;
 
-class Show extends Component
+class Index extends Component
 {
     public function render()
     {
-        return view('livewire.user-profile.address.show');
+        return view('livewire.user-profile.address.index');
     }
 }
