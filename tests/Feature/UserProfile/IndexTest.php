@@ -9,5 +9,5 @@ test('should be able to access user-profile.show route', function () {
     $user = User::factory()->create();
     actingAs($user);
 
-    get(route('user-profile.show'))->assertOk();
+    get(route('user-profile.index'))->assertOk();
 });

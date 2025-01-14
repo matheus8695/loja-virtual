@@ -41,6 +41,6 @@ class Update extends Component
         $this->user->update();
 
         $this->modal = false;
-        $this->dispatch('user-profile::reload')->to('user-profile.personal-data.show');
+        $this->dispatch('user-profile::reload')->to('user-profile.personal-data.index');
     }
 }

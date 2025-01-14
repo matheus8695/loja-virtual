@@ -1,6 +1,7 @@
 <?php
 
-use App\Livewire\UserProfile\PersonalData\Show;
+use App\Livewire\UserProfile\PersonalData\Index;
+
 use App\Models\User;
 use Livewire\Livewire;
 
@@ -11,7 +12,7 @@ it('should render the component', function () {
     $user = User::factory()->create();
     actingAs($user);
 
-    Livewire::test(Show::class)
+    Livewire::test(Index::class)
         ->assertOk();
 });
 
@@ -20,7 +21,7 @@ it('should make sure that we can see the personal data from authenticate user on
     $user = User::factory()->create();
     actingAs($user);
 
-    Livewire::test(Show::class)
+    Livewire::test(Index::class)
         ->assertSee($user->name)
         ->assertSee($user->email)
         ->assertSee($user->document_id)
