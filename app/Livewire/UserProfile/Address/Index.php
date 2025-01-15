@@ -15,7 +15,7 @@ class Index extends Component
     }
 
     #[Computed]
-    public function address(): Address
+    public function address(): ?Address
     {
         return Address::query()->find(Auth::user()->id);
     }

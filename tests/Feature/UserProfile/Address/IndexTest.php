@@ -26,6 +26,7 @@ it('should show the address in the screen if the user has a registered address '
         ->assertSee($address->city)
         ->assertSee($address->district)
         ->assertSee($address->state->name)
+        ->assertSee($address->street)
         ->assertSee($address->number);
 });
 

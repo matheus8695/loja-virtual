@@ -22,6 +22,7 @@ class AddressFactory extends Factory
             "city"       => fake()->city(),
             "district"   => fake()->randomElement(['Centro', 'Maria Lucia', 'Gleba Palhano']),
             "state_id"   => State::query()->inRandomOrder()->first("id"),
+            "street"     => fake()->streetName(),
             "number"     => fake()->numberBetween(0, 999),
             "complement" => fake()->boolean() ? fake()->sentence(10) : null,
         ];

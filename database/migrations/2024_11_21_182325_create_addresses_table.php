@@ -17,6 +17,7 @@ return new class () extends Migration {
             $table->string("city");
             $table->string("district");
             $table->foreignId("state_id")->constrained();
+            $table->string('street');
             $table->integer("number");
             $table->string("complement")->nullable();
             $table->timestamps();
