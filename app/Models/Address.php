@@ -20,6 +20,7 @@ class Address extends Model
         "state_id",
         "number",
         "complement",
+        "street",
     ];
 
     public function user(): BelongsTo
