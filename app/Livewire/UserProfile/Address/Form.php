@@ -52,4 +52,9 @@ class Form extends BaseForm
 
         $this->reset();
     }
+
+    public function destroy(Address $address): void
+    {
+        $address->delete();
+    }
 }

@@ -36,6 +36,6 @@ class Create extends Component
         $this->form->create();
         $this->modal = false;
 
-        $this->dispatch('address::created')->to('user-profile.address.index');
+        $this->dispatch('address::reload')->to('user-profile.address.index');
     }
 }
