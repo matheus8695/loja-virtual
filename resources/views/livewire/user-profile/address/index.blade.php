@@ -1,5 +1,17 @@
 <div class="w-1/2">
     <x-card title="Endereço" class="h-screen" separator>
+        @if (!$this->address)
+            <x-slot:menu>
+                <x-button 
+                    label="Cadastrar Endereço" 
+                    class="btn btn-outline btn-primary"
+                    icon="o-map-pin"
+                    wire:key="btn-create"
+                    @click="$dispatch('address::create')"
+                />
+            </x-slot:menu>
+        @endif
+
         <div class="bg-base-300 rounded-sm p-4">
             <div class="space-y-1 gap-4 grid grid-cols-2">
                 @if ($this->address)
@@ -15,4 +27,6 @@
             </div>
         </div>
     </x-card>
+
+    <livewire:user-profile.address.create/>
 </div>
