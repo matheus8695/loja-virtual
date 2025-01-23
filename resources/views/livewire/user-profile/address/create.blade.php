@@ -13,7 +13,7 @@
             <x-input label="Número" type='number' wire:model="form.number" inline/>
             <x-textarea
                 label="Complemento"
-                wire:model="complement"
+                wire:model="form.complement"
                 hint="Max 255 chars"
                 rows="5"
                 inline />

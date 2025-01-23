@@ -19,13 +19,13 @@ it('should be able to create a new address for authenticate user', function () {
     $stateId = State::first()->id;
 
     Livewire::test(Address\Create::class)
-        ->set('zip_code', '86072460')
-        ->set('state_id', $stateId)
-        ->set('district', 'Maria Lúcia')
-        ->set('city', 'Londrina')
-        ->set('street', 'Eiti Sugmoto')
-        ->set('number', 20)
-        ->set('complement', 'Próximo a academia DNA')
+        ->set('form.zip_code', '86072460')
+        ->set('form.state_id', $stateId)
+        ->set('form.district', 'Maria Lúcia')
+        ->set('form.city', 'Londrina')
+        ->set('form.street', 'Eiti Sugmoto')
+        ->set('form.number', 20)
+        ->set('form.complement', 'Próximo a academia DNA')
         ->call("create")
         ->assertHasNoErrors();
 
@@ -45,9 +45,9 @@ it('should be able to create a new address for authenticate user', function () {
 describe('validations', function () {
     test('zip code rules', function ($field) {
         Livewire::test(Address\Create::class)
-            ->set('zip_code', $field->value)
+            ->set('form.zip_code', $field->value)
             ->call('create')
-            ->assertHasErrors(['zip_code' => $field->rule]);
+            ->assertHasErrors(['form.zip_code' => $field->rule]);
     })->with([
         'required' => (object)['value' => '', 'rule' => 'required'],
         'max'      => (object)['value' => str_repeat('*', 9), 'rule' => 'max:8'],
@@ -57,9 +57,9 @@ describe('validations', function () {
         $this->artisan('app:states-sync')->assertExitCode(0);
 
         Livewire::test(Address\Create::class)
-            ->set('state_id', $field->value)
+            ->set('form.state_id', $field->value)
             ->call('create')
-            ->assertHasErrors(['state_id' => $field->rule]);
+            ->assertHasErrors(['form.state_id' => $field->rule]);
     })->with([
         'required' => (object)['value' => '', 'rule' => 'required'],
         'exists'   => (object)['value' => 30, 'rule' => 'exists:states,id'],
@@ -67,9 +67,9 @@ describe('validations', function () {
 
     test('city rules', function ($field) {
         Livewire::test(Address\Create::class)
-            ->set('city', $field->value)
+            ->set('form.city', $field->value)
             ->call('create')
-            ->assertHasErrors(['city' => $field->rule]);
+            ->assertHasErrors(['form.city' => $field->rule]);
     })->with([
         'required' => (object)['value' => '', 'rule' => 'required'],
         'max'      => (object)['value' => str_repeat('*', 256), 'rule' => 'max:255'],
@@ -77,9 +77,9 @@ describe('validations', function () {
 
     test('district rules', function ($field) {
         Livewire::test(Address\Create::class)
-            ->set('district', $field->value)
+            ->set('form.district', $field->value)
             ->call('create')
-            ->assertHasErrors(['district' => $field->rule]);
+            ->assertHasErrors(['form.district' => $field->rule]);
     })->with([
         'required' => (object)['value' => '', 'rule' => 'required'],
         'max'      => (object)['value' => str_repeat('*', 256), 'rule' => 'max:255'],
@@ -87,9 +87,9 @@ describe('validations', function () {
 
     test('street rules', function ($field) {
         Livewire::test(Address\Create::class)
-            ->set('street', $field->value)
+            ->set('form.street', $field->value)
             ->call('create')
-            ->assertHasErrors(['street' => $field->rule]);
+            ->assertHasErrors(['form.street' => $field->rule]);
     })->with([
         'required' => (object)['value' => '', 'rule' => 'required'],
         'max'      => (object)['value' => str_repeat('*', 256), 'rule' => 'max:255'],
@@ -97,18 +97,18 @@ describe('validations', function () {
 
     test('number rules', function ($field) {
         Livewire::test(Address\Create::class)
-            ->set('number', $field->value)
+            ->set('form.number', $field->value)
             ->call('create')
-            ->assertHasErrors(['number' => $field->rule]);
+            ->assertHasErrors(['form.number' => $field->rule]);
     })->with([
         'required' => (object)['value' => '', 'rule' => 'required'],
     ]);
 
     test('complement rules', function ($field) {
         Livewire::test(Address\Create::class)
-            ->set('complement', $field->value)
+            ->set('form.complement', $field->value)
             ->call('create')
-            ->assertHasErrors(['complement' => $field->rule]);
+            ->assertHasErrors(['form.complement' => $field->rule]);
     })->with([
         'max' => (object)['value' => str_repeat('*', 256), 'rule' => 'max:255'],
     ]);

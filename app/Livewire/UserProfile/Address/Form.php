@@ -18,7 +18,7 @@ class Form extends BaseForm
 
     public string $street = '';
 
-    public int $number;
+    public ?int $number = null;
 
     public ?string $complement = null;
 
@@ -30,7 +30,7 @@ class Form extends BaseForm
             'city'       => ['required', 'max:255'],
             'district'   => ['required', 'max:255'],
             'street'     => ['required', 'max:255'],
-            'number'     => ['required'],
+            'number'     => ['required', 'integer'],
             'complement' => ['max:255'],
         ];
     }
