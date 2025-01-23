@@ -2,36 +2,16 @@
 
 namespace App\Livewire\UserProfile\Address;
 
-use App\Models\{Address, State};
+use App\Models\{State};
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\{Computed, On, Rule};
+use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
 
 class Create extends Component
 {
+    public Form $form;
+
     public bool $modal = false;
-
-    #[Rule(['required', 'max:8'])]
-    public string $zip_code;
-
-    #[Rule(['required', 'exists:states,id'])]
-    public ?int $state_id = null;
-
-    #[Rule(['required', 'max:255'])]
-    public string $city;
-
-    #[Rule(['required', 'max:255'])]
-    public string $district;
-
-    #[Rule(['required', 'max:255'])]
-    public string $street;
-
-    #[Rule(['required'])]
-    public int $number;
-
-    #[Rule(['max:255'])]
-    public ?string $complement = null;
 
     public function render(): View
     {
@@ -47,25 +27,15 @@ class Create extends Component
     #[On('address::create')]
     public function load(): void
     {
+        $this->form->resetErrorBag();
         $this->modal = true;
     }
 
     public function create(): void
     {
-        $this->validate();
-
-        Address::query()->create([
-            'user_id'    => Auth::user()->id,
-            'zip_code'   => $this->zip_code,
-            'state_id'   => $this->state_id,
-            'district'   => $this->district,
-            'city'       => $this->city,
-            'street'     => $this->street,
-            'number'     => $this->number,
-            'complement' => $this->complement,
-        ]);
-
+        $this->form->create();
         $this->modal = false;
+
         $this->dispatch('address::created')->to('user-profile.address.index');
     }
 }

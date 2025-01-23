@@ -18,6 +18,6 @@ class Index extends Component
     #[Computed]
     public function address(): ?Address
     {
-        return Address::query()->find(Auth::user()->id);
+        return Address::query()->where('user_id', Auth::user()->id)->first();
     }
 }

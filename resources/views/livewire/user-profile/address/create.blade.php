@@ -3,14 +3,14 @@
         <hr class="my-5">
 
         <div class="space-y-2">
-            <x-input label="CEP" wire:model="zip_code" inline
+            <x-input label="CEP" wire:model="form.zip_code" inline
                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="8"
             />
-            <x-select label="Estado" :options="$this->states"  placeholder="Selecione um estado" wire:model="state_id" inline/>
-            <x-input label="Cidade" wire:model="city" inline/>
-            <x-input label="Bairro" wire:model="district" inline/>
-            <x-input label="Rua" wire:model="street" inline/>
-            <x-input label="Número" type='number' wire:model="number" inline/>
+            <x-select label="Estado" :options="$this->states"  placeholder="Selecione um estado" wire:model="form.state_id" inline/>
+            <x-input label="Cidade" wire:model="form.city" inline/>
+            <x-input label="Bairro" wire:model="form.district" inline/>
+            <x-input label="Rua" wire:model="form.street" inline/>
+            <x-input label="Número" type='number' wire:model="form.number" inline/>
             <x-textarea
                 label="Complemento"
                 wire:model="complement"
