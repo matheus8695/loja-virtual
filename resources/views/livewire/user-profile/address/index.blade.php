@@ -1,6 +1,5 @@
 <div class="w-1/2">
     <x-card title="Endereço" class="h-screen" separator>
-        @if (!$this->address)
             <x-slot:menu>
                 <x-button 
                     label="Cadastrar Endereço" 
@@ -8,9 +7,9 @@
                     icon="o-map-pin"
                     wire:key="btn-create"
                     @click="$dispatch('address::create')"
+                    :disabled="$this->address"
                 />
             </x-slot:menu>
-        @endif
 
         @if ($this->address)
             <div class="bg-base-300 rounded-sm p-4">

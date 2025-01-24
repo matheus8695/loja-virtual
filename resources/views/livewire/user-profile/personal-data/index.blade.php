@@ -3,6 +3,7 @@
         <x-slot:menu>
             <x-button 
                 label="Alterar Dados" 
+                icon="o-pencil-square"
                 class="btn btn-outline btn-primary"
                 wire:key="btn-update-{{ $this->user->id }}"
                 wire:click="update('{{ $this->user->id  }}')"
