@@ -123,5 +123,10 @@ it('should open a drawer to update an address', function () {
 });
 
 // fechar o drawer depois de editar
+it('should close a drawer to update an address', function () {
+    Livewire::test(Update::class)
+        ->call('update')
+        ->assertSet('modal', false);
+});
 
 // enviar um evento recarregar a página

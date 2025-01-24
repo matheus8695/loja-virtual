@@ -36,5 +36,6 @@ class Update extends Component
     public function update(): void
     {
         $this->form->update();
+        $this->modal = false;
     }
 }
