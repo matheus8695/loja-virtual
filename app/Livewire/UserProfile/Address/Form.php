@@ -8,6 +8,8 @@ use Livewire\Form as BaseForm;
 
 class Form extends BaseForm
 {
+    public ?Address $address = null;
+
     public string $zip_code = '';
 
     public ?int $state_id = null;
@@ -22,7 +24,7 @@ class Form extends BaseForm
 
     public ?string $complement = null;
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'zip_code'   => ['required', 'max:8'],
@@ -33,6 +35,18 @@ class Form extends BaseForm
             'number'     => ['required', 'integer'],
             'complement' => ['max:255'],
         ];
+    }
+
+    public function setAddress(Address $address): void
+    {
+        $this->address    = $address;
+        $this->zip_code   = $address->zip_code;
+        $this->state_id   = $address->state_id;
+        $this->city       = $address->city;
+        $this->district   = $address->district;
+        $this->street     = $address->street;
+        $this->number     = $address->number;
+        $this->complement = $address->complement;
     }
 
     public function create(): void
@@ -51,6 +65,21 @@ class Form extends BaseForm
         ]);
 
         $this->reset();
+    }
+
+    public function update(): void
+    {
+        $this->validate();
+
+        $this->address->zip_code   = $this->zip_code;
+        $this->address->state_id   = $this->state_id;
+        $this->address->city       = $this->city;
+        $this->address->district   = $this->district;
+        $this->address->street     = $this->street;
+        $this->address->number     = $this->number;
+        $this->address->complement = $this->complement;
+
+        $this->address->update();
     }
 
     public function destroy(Address $address): void
