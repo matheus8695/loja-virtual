@@ -23,11 +23,11 @@
                     <x-info.data title="Número">{{ $this->address->number }}</x-info.data>
                 </div>
 
-                <div class="flex justify-end mt-4">
+                <div class="flex justify-end mt-4 space-x-2">
                     <x-button 
                         label="Editar" 
                         class="btn btn-shadow"
-                        icon="o-trash"
+                        icon="o-pencil-square"
                         wire:key="btn-update"
                         @click="$dispatch('address::update', { id: {{ $this->address->id }} })"
                     />
