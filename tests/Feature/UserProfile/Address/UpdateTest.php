@@ -42,7 +42,6 @@ it('should be able to update a address', function () {
     ]);
 });
 
-// validações de campos obrigatórios
 describe('validations', function () {
     test('zip code rules', function ($field) {
         Livewire::test(Update::class)
@@ -115,18 +114,14 @@ describe('validations', function () {
     ]);
 });
 
-// abrir um drawer para editar o endereço
 it('should open a drawer to update an address', function () {
     Livewire::test(Update::class)
         ->call('load', $this->address->id)
         ->assertSet('modal', true);
 });
 
-// fechar o drawer depois de editar
 it('should close a drawer to update an address', function () {
     Livewire::test(Update::class)
         ->call('update')
         ->assertSet('modal', false);
 });
-
-// enviar um evento recarregar a página

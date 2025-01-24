@@ -37,5 +37,8 @@ class Update extends Component
     {
         $this->form->update();
         $this->modal = false;
+
+        // $this->dispatch('address::reload')->to('user-profile.address.index');
+        $this->dispatch('address::reload');
     }
 }
