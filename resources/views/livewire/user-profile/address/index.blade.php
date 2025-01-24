@@ -25,6 +25,14 @@
 
                 <div class="flex justify-end mt-4">
                     <x-button 
+                        label="Editar" 
+                        class="btn btn-shadow"
+                        icon="o-trash"
+                        wire:key="btn-update"
+                        @click="$dispatch('address::update', { id: {{ $this->address->id }} })"
+                    />
+
+                    <x-button 
                         label="Excluir" 
                         class="btn btn-shadow"
                         icon="o-trash"
@@ -42,4 +50,5 @@
 
     <livewire:user-profile.address.create/>
     <livewire:user-profile.address.delete/>
+    <livewire:user-profile.address.update/>
 </div>

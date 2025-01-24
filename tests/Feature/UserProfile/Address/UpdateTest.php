@@ -1,24 +1,25 @@
 <?php
 
-// Editar o endereço
-
 use App\Livewire\UserProfile\Address\Update;
 use App\Models\{Address, User};
 use Livewire\Livewire;
 
 use function Pest\Laravel\{actingAs, assertDatabaseHas};
 
-it('should be able to update a address', function () {
+beforeEach(function () {
     $this->artisan('app:states-sync')->assertExitCode(0);
 
     /** @var User $user */
-    $user    = User::factory()->create();
-    $address = Address::factory()->create(['user_id' => $user->id]);
+    $this->user    = User::factory()->create();
+    $this->address = Address::factory()->create(['user_id' => $this->user->id]);
 
-    actingAs($user);
+    actingAs($this->user);
+});
+
+it('should be able to update a address', function () {
 
     Livewire::test(Update::class)
-        ->call('load', $address->id)
+        ->call('load', $this->address->id)
         ->set('form.street', 'Rua teste')
         ->set('form.number', '123')
         ->set('form.complement', 'Casa')
@@ -30,7 +31,7 @@ it('should be able to update a address', function () {
         ->assertHasNoErrors();
 
     assertDatabaseHas('addresses', [
-        'id'         => $address->id,
+        'id'         => $this->address->id,
         'street'     => 'Rua teste',
         'number'     => '123',
         'complement' => 'Casa',
@@ -115,6 +116,11 @@ describe('validations', function () {
 });
 
 // abrir um drawer para editar o endereço
+it('should open a drawer to update an address', function () {
+    Livewire::test(Update::class)
+        ->call('load', $this->address->id)
+        ->assertSet('modal', true);
+});
 
 // fechar o drawer depois de editar
 
