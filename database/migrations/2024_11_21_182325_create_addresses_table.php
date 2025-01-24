@@ -13,10 +13,11 @@ return new class () extends Migration {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->constrained();
-            $table->string("zip_code");
+            $table->string("zip_code", 8);
             $table->string("city");
             $table->string("district");
             $table->foreignId("state_id")->constrained();
+            $table->string('street');
             $table->integer("number");
             $table->string("complement")->nullable();
             $table->timestamps();
