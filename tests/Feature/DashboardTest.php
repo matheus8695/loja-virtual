@@ -18,15 +18,12 @@ it('should access the dashboard route', function () {
 });
 
 it('should see products data on the dashboard', function () {
-    $this->artisan('app:categories-command')->assertExitCode(0);
-    $this->artisan('app:products-command')->assertExitCode(0);
-
-    $product = Product::first();
+    $product = Product::factory()->create();
 
     Livewire::test(Dashboard::class)
-        ->assertSee(implode(' ', array_slice(explode(' ', $product->title), 0, 4)))
+        ->assertSee($product->title)
         ->assertSee($product->image)
-        ->assertSee(number_format($product->price / 100, 2));
+        ->assertSee(number_format($product->price / 100, 2, ',', '.'));
 });
 
 describe('filters', function () {

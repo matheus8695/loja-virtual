@@ -14,11 +14,11 @@ class ProductFactory extends Factory
     {
         return [
             'category_id' => fn () => Category::first() ?? Category::factory()->create() ,
-            'title'       => fake()->words('2'),
+            'title'       => fake()->sentence('4'),
             'image'       => fake()->url(),
             'price'       => fake()->randomNumber(),
             'description' => fake()->text(),
-            'brand'       => fake()->word(2),
+            'brand'       => fake()->sentence('1'),
             'quantity'    => fake()->randomNumber(),
         ];
     }
