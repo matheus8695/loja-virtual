@@ -1,33 +1,38 @@
 <div class="flex flex-col space-y-4">
     <div class="mb-4 p-8 bg-base-100">
-        <h1 class="mb-4">Filtros</h1>
         <div class="mb-4 flex space-x-4 items-center">  
             <div class="w-2/5">
-                <x-input placeholder="Buscar por nome" wire:model.live='search'/>
+                <x-input label="Buscar por nome" placeholder="Digite o que você procura..." icon-right="o-magnifying-glass" wire:model.live='search'/>
             </div>
 
-            <div class="w-1/5">
-                <x-select placeholder="Todas" :options="$this->categories" wire:model.live="searchByCategory" />
+            <div class="w-1/5 flex items-center space-x-4">
+                <x-select label="Buscar por categoria" placeholder="Todas" :options="$this->categories" wire:model.live="searchByCategory" />
             </div>
         </div>
     </div>
 
-    <div class="grid grid-cols-3 gap-4">
-        @foreach ($this->products as $product)
-            <div class="card card-compact bg-base-100 w-96 shadow-xl hover:cursor-pointer hover:scale-105 transition-transform duration-300">
-                <figure>
-                    <img src="{{ $product->image }}" alt="{{ $product->title }}"/>
-                </figure>
+    <div class="bg-base-100 flex justify-around rounded-md">
+        <div class="grid grid-cols-3 gap-20 item-center mx-4 my-8">
+            @foreach ($this->products as $product)
+                <div class="card card-compact bg-base-300 w-96 shadow-2xl hover:cursor-pointer">
+                    <figure>
+                        <img src="{{ $product->image }}" alt="{{ $product->title }}"/>
+                    </figure>
 
-                <div class="card-body">
-                    <h2 class="card-title">{{ implode(' ', array_slice(explode(' ', $product->title), 0, 4)) }}</h2>
+                    <div class="card-body">
+                        <h2 class="card-title">{{ implode(' ', array_slice(explode(' ', $product->title), 0, 4)) }}</h2>
 
-                    <div class="text-lg justify-start">
-                        <span class="font-bold">R$ {{ number_format($product->price / 100, 2, ',', '.') }}</span>
+                        <div class="text-lg justify-start">
+                            <span class="font-bold">R$ {{ number_format($product->price / 100, 2, ',', '.') }}</span>
+                        </div>
+                    </div>
+
+                    <div class="card-footer mx-4 mb-8">
+                        <x-button class="btn btn-warning w-full text-lg">Comprar</x-button>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
     
     <div class="mt-4 flex justify-center">
