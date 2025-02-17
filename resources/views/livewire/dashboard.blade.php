@@ -1,5 +1,5 @@
-<div class="flex flex-col space-y-4">
-    <div class="mb-4 p-8 bg-base-100">
+<div class="flex flex-col">
+    <div class="mb-4 p-8 bg-base-100 rounded-md">
         <div class="mb-4 flex space-x-4 items-center">  
             <div class="w-2/5">
                 <x-input label="Buscar por nome" placeholder="Digite o que você procura..." icon-right="o-magnifying-glass" wire:model.live='search'/>
@@ -12,22 +12,22 @@
     </div>
 
     <div class="bg-base-100 flex justify-around rounded-md">
-        <div class="grid grid-cols-3 gap-20 item-center mx-4 my-8">
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-20 item-center mx-4 my-8">
             @foreach ($this->products as $product)
-                <div class="card card-compact bg-base-300 w-96 shadow-2xl hover:cursor-pointer">
+                <div class="card card-compact bg-base-200 border-2 border-base-200 w-full max-w-xs xl:max-w-sm shadow-xl hover:cursor-pointer">
                     <figure>
                         <img src="{{ $product->image }}" alt="{{ $product->title }}"/>
                     </figure>
 
                     <div class="card-body">
-                        <h2 class="card-title">{{ implode(' ', array_slice(explode(' ', $product->title), 0, 4)) }}</h2>
-
-                        <div class="text-lg justify-start">
-                            <span class="font-bold">R$ {{ number_format($product->price / 100, 2, ',', '.') }}</span>
-                        </div>
+                        <h2 class="text-sm xl:text-lg card-title">{{ implode(' ', array_slice(explode(' ', $product->title), 0, 4)) }}</h2>
                     </div>
 
-                    <div class="card-footer mx-4 mb-8">
+                    <div class="card-footer mx-4 mb-8 space-y-4">
+                        <div class="justify-start">
+                            <span class="font-bold">R$ {{ number_format($product->price / 100, 2, ',', '.') }}</span>
+                        </div>
+
                         <x-button class="btn btn-warning w-full text-lg">Comprar</x-button>
                     </div>
                 </div>

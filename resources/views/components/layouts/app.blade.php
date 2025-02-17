@@ -26,10 +26,6 @@
     <x-main full-width>
         {{-- SIDEBAR --}}
         <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 dark:bg-base-300">
-
-            {{-- BRAND --}}
-            <x-app-brand class="p-5 pt-3" />
-
             {{-- MENU --}}
             <x-menu activate-by-route>
 
@@ -37,7 +33,7 @@
                 @if($user = auth()->user())
                     <x-menu-separator />
 
-                    <x-list-item :item="$user" value="name" sub-value="email" no-separator no-hover class="-mx-2 !-my-2 rounded">
+                    <x-list-item :item="$user" value="name" no-separator no-hover class="-mx-2 !-my-2 rounded">
                         <x-slot:actions>
                            <livewire:auth.logout/>
                         </x-slot:actions>
@@ -46,12 +42,8 @@
                     <x-menu-separator />
                 @endif
 
-                <x-menu-item title="Perfil" icon="o-user-circle" :link="route('user-profile.index')" />
-                <x-menu-item title="Home" icon="o-home" :link="route('dashboard')" />
-                {{-- <x-menu-sub title="Settings" icon="o-cog-6-tooth">
-                    <x-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-menu-item title="Archives" icon="o-archive-box" link="####" />
-                </x-menu-sub> --}}
+                <x-menu-item title="Perfil" icon="o-user-circle" :link="route('user-profile.index')"/>
+                <x-menu-item title="Home" icon="o-home" :link="route('dashboard')"/>
             </x-menu>
         </x-slot:sidebar>
 

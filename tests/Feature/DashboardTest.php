@@ -13,8 +13,8 @@ beforeEach(function () {
 });
 
 it('should access the dashboard route', function () {
-    $response = $this->get(route('dashboard'));
-    $response->assertStatus(200);
+    Livewire::test(Dashboard::class)
+        ->assertOk();
 });
 
 it('should see products data on the dashboard', function () {
