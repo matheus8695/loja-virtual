@@ -25,7 +25,7 @@
     {{-- MAIN --}}
     <x-main full-width>
         {{-- SIDEBAR --}}
-        <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 dark:bg-base-300">
+        <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-200">
             {{-- MENU --}}
             <x-menu activate-by-route>
 
