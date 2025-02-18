@@ -7,7 +7,7 @@ Route::get('/cadastrar', Auth\Register::class)->name('register');
 Route::get("/entrar", Auth\Login::class)->name('login');
 Route::get("/logout", Auth\Logout::class)->name('logout');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function (): void {
     // Route::get("/", Welcome::class)->name('dashboard'); // tela inicial com os produtos
     Route::get('/', Dashboard::class)->name('dashboard');
 

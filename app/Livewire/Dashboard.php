@@ -24,6 +24,22 @@ class Dashboard extends Component
         return view('livewire.dashboard');
     }
 
+    /**
+     * Métodos reativos são chamados automaticamente usando o padrão update + Nome_da_propriedade
+     */
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
+
+    /**
+     * Métodos reativos são chamados automaticamente usando o padrão update + Nome_da_propriedade
+     */
+    public function updatedSearchByCategory(): void
+    {
+        $this->resetPage();
+    }
+
     #[Computed]
     public function Products(): Paginator
     {
@@ -44,7 +60,6 @@ class Dashboard extends Component
                     $this->searchByCategory
                 )
             )
-            ->limit(6)
             ->simplePaginate(9);
     }
 
