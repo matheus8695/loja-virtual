@@ -3,6 +3,7 @@
 namespace App\Livewire\UserProfile\Address;
 
 use App\Models\{Address, State};
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
@@ -13,11 +14,14 @@ class Update extends Component
 
     public bool $modal = false;
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.user-profile.address.update');
     }
 
+    /**
+     * @return Collection<int, State>
+     */
     #[Computed]
     public function states(): Collection
     {

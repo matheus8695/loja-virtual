@@ -12,6 +12,7 @@ class StateStore implements ShouldQueue
 
     /**
      * Create a new job instance.
+     * @param array<string> $state
      */
     public function __construct(public array $state)
     {

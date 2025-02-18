@@ -4,6 +4,7 @@ namespace App\Livewire\UserProfile\Address;
 
 use App\Models\{State};
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
 
@@ -18,8 +19,11 @@ class Create extends Component
         return view('livewire.user-profile.address.create');
     }
 
+    /**
+     * @return Collection<int,State>
+     */
     #[Computed]
-    public function states()
+    public function states(): Collection
     {
         return State::query()->orderBy('name')->get();
     }

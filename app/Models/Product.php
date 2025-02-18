@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
+    /** @use HasFactory<\Database\Factories\AddressFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -20,11 +21,17 @@ class Product extends Model
         "brand",
     ];
 
+    /**
+     * @return BelongsTo<Category, $this>
+     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
+    /**
+     * @return BelongsTo<ProductOrder, $this>
+     */
     public function productOrder(): BelongsTo
     {
         return $this->belongsTo(ProductOrder::class);

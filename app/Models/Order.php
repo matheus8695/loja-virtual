@@ -13,11 +13,17 @@ class Order extends Model
         "price",
     ];
 
+    /**
+     * @return BelongsTo<User, $this>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return BelongsTo<ProductOrder, $this>
+     */
     public function productOrder(): BelongsTo
     {
         return $this->belongsTo(ProductOrder::class);
