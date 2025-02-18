@@ -14,23 +14,25 @@
     <div class="bg-base-100 flex justify-around rounded-md">
         <div class="grid grid-cols-2 lg:grid-cols-3 gap-20 item-center mx-4 my-8">
             @foreach ($this->products as $product)
-                <div class="card card-compact bg-base-200 border-2 border-base-200 w-full max-w-xs xl:max-w-sm shadow-xl hover:cursor-pointer">
-                    <figure>
-                        <img src="{{ $product->image }}" alt="{{ $product->title }}"/>
-                    </figure>
+                <a href="{{ route('product.index', base64_encode($product->id)) }}">
+                    <div class="card card-compact bg-base-200 border-2 border-base-200 w-full max-w-xs xl:max-w-sm shadow-xl hover:cursor-pointer">
+                        <figure>
+                            <img src="{{ $product->image }}" alt="{{ $product->title }}"/>
+                        </figure>
 
-                    <div class="card-body">
-                        <h2 class="text-sm xl:text-lg card-title">{{ implode(' ', array_slice(explode(' ', $product->title), 0, 4)) }}</h2>
-                    </div>
-
-                    <div class="card-footer mx-4 mb-8 space-y-4">
-                        <div class="justify-start">
-                            <span class="font-bold">R$ {{ number_format($product->price / 100, 2, ',', '.') }}</span>
+                        <div class="card-body">
+                            <h2 class="text-sm xl:text-lg card-title">{{ implode(' ', array_slice(explode(' ', $product->title), 0, 4)) }}</h2>
                         </div>
 
-                        <x-button class="btn btn-warning w-full text-lg">Comprar</x-button>
+                        <div class="card-footer mx-4 mb-8 space-y-4">
+                            <div class="justify-start">
+                                <span class="font-bold">R$ {{ number_format($product->price / 100, 2, ',', '.') }}</span>
+                            </div>
+
+                            <x-button class="btn btn-warning w-full text-lg">Comprar</x-button>
+                        </div>
                     </div>
-                </div>
+                </a>
             @endforeach
         </div>
     </div>

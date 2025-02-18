@@ -1,6 +1,7 @@
 <?php
 
-use App\Livewire\{Auth, Dashboard, UserProfile, Welcome};
+use App\Livewire\Product;
+use App\Livewire\{Auth, Dashboard, UserProfile};
 use Illuminate\Support\Facades\Route;
 
 Route::get('/cadastrar', Auth\Register::class)->name('register');
@@ -13,4 +14,9 @@ Route::middleware('auth')->group(function (): void {
 
     #profile
     Route::get('/minha_conta', UserProfile\Index::class)->name('user-profile.index');
+    #end profile
+
+    #product
+    Route::get('produto/{encodedId}', Product\Index::class)->name('product.index');
+    #end product
 });
