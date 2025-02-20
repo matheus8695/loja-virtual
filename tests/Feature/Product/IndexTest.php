@@ -6,13 +6,27 @@ use Livewire\Livewire;
 
 use function Pest\Laravel\actingAs;
 
-it('should be access the product route', function () {
+beforeEach(function () {
     /** @var User $user */
-    $user    = User::factory()->create();
-    $product = ModelProduct::factory()->create();
+    $this->user = User::factory()->create();
+    actingAs($this->user);
+});
 
-    actingAs($user);
+it('should be access the product route', function () {
+    $product = ModelProduct::factory()->create();
 
     Livewire::test(Product\Index::class, ['encodedId' => base64_encode($product->id)])
         ->assertOk();
+});
+
+it('should show the product data in screen', function () {
+    $product = ModelProduct::factory()->create();
+
+    Livewire::test(Product\Index::class, ['encodedId' => base64_encode($product->id)])
+        ->assertSee($product->title)
+        ->assertSee($product->image)
+        ->assertSee($product->description)
+        ->assertSee(number_format($product->price / 100, 2, ',', '.'))
+        ->assertSee($product->brand)
+        ->assertSee($product->quantity);
 });
