@@ -37,7 +37,7 @@ class Register extends Component
         return view('livewire.auth.register');
     }
 
-    public function submit()
+    public function submit(): void
     {
         $this->validate();
 

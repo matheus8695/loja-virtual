@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use App\Models\{Category, Product};
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\{Builder};
+use Illuminate\Database\Eloquent\{Builder, Collection};
 use Illuminate\Pagination\Paginator;
 use Livewire\Attributes\Computed;
 use Livewire\{Component, WithPagination};
@@ -12,8 +12,6 @@ use Livewire\{Component, WithPagination};
 class Dashboard extends Component
 {
     use WithPagination;
-
-    protected $paginationTheme = 'tailwind';
 
     public ?string $search = null;
 
@@ -24,6 +22,25 @@ class Dashboard extends Component
         return view('livewire.dashboard');
     }
 
+    /**
+     * Métodos reativos são chamados automaticamente usando o padrão update + Nome_da_propriedade
+     */
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
+
+    /**
+     * Métodos reativos são chamados automaticamente usando o padrão update + Nome_da_propriedade
+     */
+    public function updatedSearchByCategory(): void
+    {
+        $this->resetPage();
+    }
+
+    /**
+     * @return Paginator<Product>
+     */
     #[Computed]
     public function Products(): Paginator
     {
@@ -44,12 +61,14 @@ class Dashboard extends Component
                     $this->searchByCategory
                 )
             )
-            ->limit(6)
             ->simplePaginate(9);
     }
 
+    /**
+     * @return Collection<int, Category>
+     */
     #[Computed]
-    public function Categories()
+    public function Categories(): Collection
     {
         return Category::get();
     }

@@ -15,6 +15,9 @@ class State extends Model
         'name',
     ];
 
+    /**
+     * @return HasMany<Address, $this>
+     */
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);

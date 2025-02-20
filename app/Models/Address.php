@@ -22,11 +22,17 @@ class Address extends Model
         'complement',
     ];
 
+    /**
+     * @return BelongsTo<User, $this>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return BelongsTo<State, $this>
+     */
     public function state(): BelongsTo
     {
         return $this->belongsTo(State::class);

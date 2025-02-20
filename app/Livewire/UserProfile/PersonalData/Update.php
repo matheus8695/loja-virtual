@@ -3,6 +3,7 @@
 namespace App\Livewire\UserProfile\PersonalData;
 
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\{On};
 use Livewire\Component;
 
@@ -12,11 +13,14 @@ class Update extends Component
 
     public bool $modal = false;
 
-    public function render()
+    public function render(): view
     {
         return view('livewire.user-profile.personal-data.update');
     }
 
+    /**
+     * @return array<string, list<string>>
+     */
     public function rules(): array
     {
         return [

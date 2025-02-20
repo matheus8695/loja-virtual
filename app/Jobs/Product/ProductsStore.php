@@ -11,7 +11,8 @@ class ProductsStore implements ShouldQueue
     use Queueable;
 
     /**
-     * Create a new job instance.
+     * @param array<string, int> $product
+     * @return void
      */
     public function __construct(public array $product)
     {

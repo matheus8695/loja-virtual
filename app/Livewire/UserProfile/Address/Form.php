@@ -24,6 +24,9 @@ class Form extends BaseForm
 
     public ?string $complement = null;
 
+    /**
+     * @return array<string, list<string>>
+     */
     public function rules(): array
     {
         return [
