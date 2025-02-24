@@ -7,6 +7,7 @@ use Rector\Config\RectorConfig;
 return RectorConfig::configure()
     ->withPaths([
         __DIR__ . '/app',
+        __DIR__ . '/app/Livewire',
         __DIR__ . '/bootstrap/app.php',
         __DIR__ . '/routes',
     ])

@@ -2,10 +2,11 @@
 
 use App\Enum\Status;
 use App\Livewire\Order;
-use App\Models\{Product, User};
+use App\Models\Order as ModelOrder;
+use App\Models\{Product, ProductOrder, User};
 use Livewire\Livewire;
 
-use function Pest\Laravel\{actingAs, assertDatabaseHas};
+use function Pest\Laravel\{actingAs, assertDatabaseCount, assertDatabaseHas};
 
 beforeEach(function () {
     /**@var User $user */
@@ -32,6 +33,28 @@ it('should create an order for the logged user when click in purchasing a produc
     ]);
 });
 
-/**
- * quando o usuário já tiver um pedido com status OPEN o sistema deve adicionar o produto na tabela productOrder
-*/
+test('when a user already has an open order the system have to add the product to product_orders table', function () {
+    $product1 = Product::factory()->create();
+    $product2 = Product::factory()->create();
+
+    $order = ModelOrder::factory()->create(['user_id' => $this->user->id, 'status' => Status::OPEN, ]);
+
+    ProductOrder::factory()->create([
+        'product_id' => $product1->id,
+        'order_id'   => $order->id,
+        'quantity'   => 1,
+        'price'      => $product1->price,
+    ]);
+
+    Livewire::test(Order\Create::class)
+        ->call('handleProductOrder', $product2);
+
+    assertDatabaseHas('product_orders', [
+        'product_id' => $product2->id,
+        'order_id'   => $order->id,
+        'quantity'   => 1,
+        'price'      => $product2->price,
+    ]);
+
+    assertDatabaseCount('product_orders', 2);
+});
