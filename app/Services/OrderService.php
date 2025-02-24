@@ -26,7 +26,7 @@ class OrderService
                 'status'  => Status::OPEN,
             ]);
         } catch (Exception $e) {
-            throw new Exception('Erro ao criar ou buscar pedido' . $e->getMessage(), $e->getCode(), $e);
+            throw new Exception('Erro ao criar ou buscar pedido para o usuário com ID ' . Auth::id() . ': ' . $e->getMessage());
         }
     }
 
