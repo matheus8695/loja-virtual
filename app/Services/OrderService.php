@@ -12,7 +12,16 @@ class OrderService
     public function getOrCreateOrder(): Order
     {
         try {
-            return Order::query()->firstOrCreate([
+            $existingOrder = Order::query()
+                ->where('user_id', Auth::id())
+                ->where('status', Status::OPEN)
+                ->first();
+
+            if ($existingOrder) {
+                return $existingOrder;
+            }
+
+            return Order::query()->create([
                 'user_id' => Auth::id(),
                 'status'  => Status::OPEN,
             ]);
