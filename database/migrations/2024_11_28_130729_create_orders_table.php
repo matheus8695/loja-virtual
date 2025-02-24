@@ -14,7 +14,6 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string("status");
-            $table->integer("price");
             $table->timestamps();
             $table->softDeletes();
         });
