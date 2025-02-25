@@ -18,7 +18,7 @@ it('should create an order for the logged user when click in purchasing a produc
     $product = Product::factory()->create();
 
     Livewire::test(Order\Create::class)
-        ->call('handleProductOrder', $product);
+        ->call('handleProductOrder', $product->id);
 
     assertDatabaseHas('orders', [
         'user_id' => $this->user->id,
@@ -47,7 +47,7 @@ test('when a user already has an open order the system have to add the product t
     ]);
 
     Livewire::test(Order\Create::class)
-        ->call('handleProductOrder', $product2);
+        ->call('handleProductOrder', $product2->id);
 
     assertDatabaseHas('product_orders', [
         'product_id' => $product2->id,
@@ -74,7 +74,7 @@ it('should ensure the user only has one open order at a time', function () {
 
     // Adiciona um produto ao pedido existente
     Livewire::test(Order\Create::class)
-        ->call('handleProductOrder', $product1);
+        ->call('handleProductOrder', $product1->id);
 
     // Verifica novamente que o número de pedidos com status OPEN permanece 1
     $this->assertDatabaseCount('orders', 1);
@@ -82,7 +82,7 @@ it('should ensure the user only has one open order at a time', function () {
     // Agora cria um segundo pedido
     $product2 = Product::factory()->create();
     Livewire::test(Order\Create::class)
-        ->call('handleProductOrder', $product2);
+        ->call('handleProductOrder', $product2->id);
 
     // Verifica novamente que o número de pedidos com status OPEN permanece 1
     $this->assertDatabaseCount('orders', 1);
