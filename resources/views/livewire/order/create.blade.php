@@ -5,6 +5,6 @@
         class="btn btn-warning w-full text-lg" 
         icon="o-shopping-cart"
     >
-        Comprar
+        Finalizar Comprar
     </x-button>
 </div>
