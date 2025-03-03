@@ -17,10 +17,10 @@
                     <h2 class="text-lg font-semibold">Em Estoque: {{ $product->quantity }}</h2> 
                 </div>
             </div>
-
+ 
             <!-- Button -->
             <div class="mt-auto">
-                <x-button class="btn btn-warning w-full text-lg" icon="o-shopping-cart">Comprar</x-button>
+                <livewire:order.create :product="$product"/>
             </div>
         </div>
     </div>

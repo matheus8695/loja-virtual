@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Services;
+
+use App\Enum\Status;
+use App\Models\{Order, Product, ProductOrder, User};
+
+class OrderService
+{
+    public function addProductToOrder(Product $product, User $user): Order
+    {
+        $order = $this->getOrCreateOpenOder($user);
+
+        if (!$order->hasProduct($product->id)) {
+            $this->createProductOrder($product, $order);
+        }
+
+        return $order;
+    }
+
+    private function getOrCreateOpenOder(User $user): Order
+    {
+        return Order::query()->firstOrCreate([
+            'user_id' => $user->id,
+            'status'  => Status::OPEN,
+        ]);
+    }
+
+    private function createProductOrder(Product $product, Order $order): void
+    {
+        ProductOrder::query()->create([
+            'product_id' => $product->id,
+            'order_id'   => $order->id,
+            'quantity'   => 1,
+            'price'      => $product->price,
+        ]);
+    }
+}

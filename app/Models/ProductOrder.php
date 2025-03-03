@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductOrder extends Model
 {
+    /** @use HasFactory<\Database\Factories\AddressFactory> */
+    use HasFactory;
+
     protected $fillable = [
         "order_id",
         "product_id",

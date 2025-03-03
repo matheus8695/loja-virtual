@@ -30,3 +30,11 @@ it('should show the product data in screen', function () {
         ->assertSee($product->brand)
         ->assertSee($product->quantity);
 });
+
+it('should dispatch an event when click in purchase button', function () {
+    $product = ModelProduct::factory()->create();
+
+    Livewire::test(Product\Index::class, ['encodedId' => base64_encode($product->id)])
+        ->call('handleOrder', $product->id)
+        ->assertDispatched('order::handleOrder', productId: $product->id);
+});
