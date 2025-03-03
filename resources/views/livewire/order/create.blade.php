@@ -3,7 +3,7 @@
         wire:key="order-{{ $product->id }}"
         wire:click="handleProductOrder"
         class="btn btn-warning w-full text-lg" 
-        icon="o-shopping-cart"
+        icon="o-currency-dollar"
     >
         Finalizar Comprar
     </x-button>

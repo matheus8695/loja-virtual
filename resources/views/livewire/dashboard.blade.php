@@ -1,4 +1,5 @@
 <div class="flex flex-col">
+    <x-toast/>
     <div class="mb-4 p-8 bg-base-100 rounded-md">
         <div class="mb-4 flex space-x-4 items-center">  
             <div class="w-2/5">

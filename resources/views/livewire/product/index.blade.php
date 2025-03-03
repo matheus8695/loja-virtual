@@ -19,7 +19,8 @@
             </div>
  
             <!-- Button -->
-            <div class="mt-auto">
+            <div class="mt-auto space-y-2">
+                <livewire:cart.create :product="$product"/>
                 <livewire:order.create :product="$product"/>
             </div>
         </div>
