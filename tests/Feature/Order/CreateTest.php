@@ -103,7 +103,7 @@ test('When the user tries to buy a product that is already in the order the syst
     Livewire::test(Order\Create::class, ['product' => $product])
         ->call('handleProductOrder')
         ->assertHasNoErrors()
-        ->assertRedirect(route('order.index', ['orderId' => $order->id]));
+        ->assertRedirect(route('order.index', ['orderId' => base64_encode((string)$order->id)]));
 
     assertDatabaseCount('product_orders', 1);
 
