@@ -1,7 +1,9 @@
 <div class="flex flex-col">
     <x-toast/>
-    <div class="mb-4 p-8 bg-base-100 rounded-md">
-        <div class="mb-4 flex space-x-4 items-center">  
+
+    <div class="mb-4 p-8 bg-base-100 rounded-md flex items-center">
+        <!-- Área de pesquisa -->
+        <div class="w-4/5 flex space-x-4 items-center">
             <div class="w-2/5">
                 <x-input label="Buscar por nome" placeholder="Digite o que você procura..." icon-right="o-magnifying-glass" wire:model.live='search'/>
             </div>
@@ -9,6 +11,12 @@
             <div class="w-1/5 flex items-center space-x-4">
                 <x-select label="Buscar por categoria" placeholder="Todas" :options="$this->categories" wire:model.live="searchByCategory" />
             </div>
+        </div>
+
+        <div class="ml-auto">
+            <x-button icon="o-shopping-cart" class="btn-circle relative">
+                <x-badge value="{{ $this->cartCount }}" class="badge-error absolute -right-2 -top-2" />
+            </x-button>
         </div>
     </div>
 
