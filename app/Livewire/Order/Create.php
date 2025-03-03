@@ -2,27 +2,32 @@
 
 namespace App\Livewire\Order;
 
-use App\Actions\{CreateOrder, CreateProductOrder};
-use App\Models\{User};
+use App\Models\{Product, User};
+use App\Services\OrderService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Create extends Component
 {
+    public Product $product;
+
     public function render(): View
     {
         return view('livewire.order.create');
     }
 
-    public function handleProductOrder(int $productId): void
+    public function mount(Product $product): void
+    {
+        $this->product = $product;
+    }
+
+    public function handleProductOrder(): void
     {
         /** @var User $user */
-        $user = Auth::user();
+        $user  = Auth::user();
+        $order = (new OrderService())->addProductToOrder($this->product, $user);
 
-        $orderId = $user->getOpenOrderId() ?? CreateOrder::execute();
-        CreateProductOrder::execute($productId, $orderId);
-
-        $this->redirect(route('order.index', ['orderId' => $orderId]));
+        $this->redirect(route('order.index', ['orderId' => $order->id]));
     }
 }

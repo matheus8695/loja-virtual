@@ -32,4 +32,12 @@ class Order extends Model
     {
         return $this->belongsTo(ProductOrder::class);
     }
+
+    public function hasProduct(int $productId): bool
+    {
+        return ProductOrder::query()
+            ->where('order_id', $this->id)
+            ->where('product_id', $productId)
+            ->exists();
+    }
 }

@@ -19,4 +19,9 @@ class Index extends Component
     {
         $this->product = Product::findOrFail(base64_decode($encodedId));
     }
+
+    public function handleOrder(int $productId): void
+    {
+        $this->dispatch('order::handleOrder', productId: $productId)->to('order.create');
+    }
 }

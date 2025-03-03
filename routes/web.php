@@ -20,6 +20,6 @@ Route::middleware('auth')->group(function (): void {
     #end productP
 
     #order
-    Route::get('meus_pedidos/{orderId}', Order\Create::class)->name('order.index');
+    Route::get('meus_pedidos/{orderId}', Order\Index::class)->name('order.index');
     #end order
 });
