@@ -28,6 +28,7 @@ class Create extends Component
         $user  = Auth::user();
         $order = (new OrderService())->addProductToOrder($this->product, $user);
 
-        $this->redirect(route('order.index', ['orderId' => $order->id]));
+        $encodeId = base64_encode((string)$order->id);
+        $this->redirect(route('order.index', ['orderId' => $encodeId]));
     }
 }
