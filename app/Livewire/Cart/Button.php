@@ -31,6 +31,6 @@ class Button extends Component
 
     public function showCart(): void
     {
-        $this->dispatch('cart::show')->to('cart.index');
+        $this->dispatch('cart::show')->to('cart.show');
     }
 }
