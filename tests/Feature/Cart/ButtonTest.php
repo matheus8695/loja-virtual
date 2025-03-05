@@ -25,7 +25,5 @@ it('should dispatch cart::show event', function () {
 
     Livewire::test(Button::class)
         ->call('showCart')
-        ->assertDispatched('cart::show', [
-            'orderId' => $order->id,
-        ]);
+        ->assertDispatched('cart::show', orderId: $order->id, );
 });
