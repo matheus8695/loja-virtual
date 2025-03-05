@@ -9,6 +9,8 @@ use Livewire\Component;
 
 class Button extends Component
 {
+    public ?Order $order = null;
+
     public function render(): View
     {
         return view('livewire.cart.button');
@@ -17,12 +19,10 @@ class Button extends Component
     #[Computed]
     public function cartCount(): int
     {
-        $order = Order::query()->where('user_id', auth()->user()->id)
-            ->where('status', 'open')
-            ->first();
+        $this->getOrderId();
 
-        $count = $order ? ProductOrder::query()
-            ->where('order_id', $order->id)
+        $count = $this->order ? ProductOrder::query()
+            ->where('order_id', $this->order->id)
             ->count()
             : 0;
 
@@ -31,6 +31,13 @@ class Button extends Component
 
     public function showCart(): void
     {
-        $this->dispatch('cart::show')->to('cart.show');
+        $this->dispatch('cart::show', orderId: $this->order->id)->to('cart.show');
+    }
+
+    public function getOrderId(): void
+    {
+        $this->order = Order::query()->where('user_id', auth()->user()->id)
+            ->where('status', 'open')
+            ->first();
     }
 }

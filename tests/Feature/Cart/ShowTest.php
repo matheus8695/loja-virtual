@@ -23,7 +23,8 @@ it('should open a drawer to show the products', function () {
     $order = Order::factory()->create(
         [
             'user_id' => $this->user->id,
-            'status'  => Status::OPEN]
+            'status'  => Status::OPEN,
+        ]
     );
 
     Livewire::test(Show::class)

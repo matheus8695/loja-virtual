@@ -1,7 +1,7 @@
 <?php
 
 use App\Livewire\Cart\Button;
-use App\Models\User;
+use App\Models\{Order, User};
 use Livewire\Livewire;
 
 use function Pest\Laravel\actingAs;
@@ -18,7 +18,14 @@ it('should render the component', function () {
 });
 
 it('should dispatch cart::show event', function () {
+    $order = Order::factory()->create([
+        'user_id' => $this->user->id,
+        'status'  => 'open',
+    ]);
+
     Livewire::test(Button::class)
         ->call('showCart')
-        ->assertDispatched('cart::show');
+        ->assertDispatched('cart::show', [
+            'orderId' => $order->id,
+        ]);
 });

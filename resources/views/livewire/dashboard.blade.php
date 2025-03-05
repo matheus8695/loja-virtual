@@ -13,9 +13,7 @@
             </div>
         </div>
 
-        <div class="ml-auto">
-            <livewire:cart.button/>
-        </div>
+        <livewire:cart.button/>
     </div>
 
     <div class="bg-base-100 flex justify-around rounded-md">
@@ -49,4 +47,6 @@
     <div class="mt-4 flex justify-center">
         {{ $this->products->links() }}
     </div>
+
+    <livewire:cart.show/>
 </div>
