@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\{Category, Order, Product, ProductOrder};
+use App\Models\{Category, Product};
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\{Builder, Collection};
 use Illuminate\Pagination\Paginator;
@@ -73,17 +73,5 @@ class Dashboard extends Component
     public function Categories(): Collection
     {
         return Category::get();
-    }
-
-    #[Computed]
-    public function cartCount(): int
-    {
-        $order = Order::query()->where('user_id', auth()->user()->id)
-            ->where('status', 'open')
-            ->first();
-
-        return ProductOrder::query()
-            ->where('order_id', $order->id)
-            ->count();
     }
 }

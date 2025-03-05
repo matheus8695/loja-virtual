@@ -14,9 +14,7 @@
         </div>
 
         <div class="ml-auto">
-            <x-button icon="o-shopping-cart" class="btn-circle relative">
-                <x-badge value="{{ $this->cartCount }}" class="badge-error absolute -right-2 -top-2" />
-            </x-button>
+            <livewire:cart.button/>
         </div>
     </div>
 
