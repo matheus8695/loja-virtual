@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, Pivot};
 
-class ProductOrder extends Model
+class ProductOrder extends Pivot
 {
     /** @use HasFactory<\Database\Factories\AddressFactory> */
     use HasFactory;
+
+    protected $table = 'product_orders';
 
     protected $fillable = [
         "order_id",
@@ -20,18 +21,18 @@ class ProductOrder extends Model
     ];
 
     /**
-     * @return HasMany<Order, $this>
+     * @return BelongsTo<Order, $this>
      */
-    public function orders(): HasMany
+    public function orders(): BelongsTo
     {
-        return $this->hasMany(Order::class);
+        return $this->BelongsTo(Order::class);
     }
 
     /**
-     * @return HasMany<Product, $this>
+     * @return BelongsTo<Product, $this>
      */
-    public function products(): HasMany
+    public function products(): BelongsTo
     {
-        return $this->hasMany(Product::class);
+        return $this->BelongsTo(Product::class);
     }
 }
