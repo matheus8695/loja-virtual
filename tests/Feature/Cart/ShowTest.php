@@ -2,7 +2,7 @@
 
 use App\Enum\Status;
 use App\Livewire\Cart\Show;
-use App\Models\{Order, Product, ProductOrder, User};
+use App\Models\{Order, Product, User};
 use Livewire\Livewire;
 
 use function Pest\Laravel\actingAs;
@@ -37,19 +37,17 @@ it('should show the products data in the screen', function () {
         'status'  => Status::OPEN,
     ]);
 
-    ProductOrder::factory()->create([
-        'order_id'   => $order->id,
-        'product_id' => $product->id,
-        'quantity'   => 1,
-        'price'      => $product->price,
+    $order->products()->attach($product->id, [
+        'quantity' => 1,
+        'price'    => $product->price,
     ]);
 
     // abrir o carrinho
     Livewire::test(Show::class)
         ->call('load', $order->id)
-        ->assertHasNoErrors()
+        ->assertSet('orderId', $order->id)
         ->assertSee($product->image)
-        ->assertSee($product->name)
+        ->assertSee($product->title)
         ->assertSee($product->price);
 });
 

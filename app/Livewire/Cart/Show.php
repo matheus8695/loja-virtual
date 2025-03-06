@@ -13,7 +13,7 @@ class Show extends Component
 {
     public bool $modal = false;
 
-    public ?int $OrderId = null;
+    public ?int $orderId = null;
 
     public function render(): View
     {
@@ -23,7 +23,7 @@ class Show extends Component
     #[On('cart::show')]
     public function load(int $orderId): void
     {
-        $this->OrderId = $orderId;
+        $this->orderId = $orderId;
         $this->modal   = true;
     }
 
@@ -35,7 +35,7 @@ class Show extends Component
     {
         return DB::table('products as p')
             ->join('product_orders as po', 'po.product_id', '=', 'p.id')
-            ->where('po.order_id', 22)
+            ->where('po.order_id', $this->orderId)
             ->select('p.title', 'p.price', 'p.image')
             ->get();
     }
