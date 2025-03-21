@@ -25,7 +25,7 @@
                 </div>
             </div>
     
-            <x-button class="btn btn-info w-full text-lg">Finalizar Compra</x-button>
+            <x-button class="btn btn-info w-full text-lg" link="{{ route('order.index', base64_encode($orderId)) }}">Finalizar Compra</x-button>
         </div>
     </div>
 </x-drawer>
