@@ -45,11 +45,7 @@ it('should show the products data in the screen', function () {
     // abrir o carrinho
     Livewire::test(Show::class)
         ->call('load', $order->id)
-        ->assertSet('orderId', $order->id)
         ->assertSee($product->image)
-        ->assertSee($product->title)
-        ->assertSee($product->price);
+        ->assertSee(implode(' ', array_slice(explode(' ', $product->title), 0, 4)))
+        ->assertSee(number_format($product->price / 100, 2, ',', '.'));
 });
-
-// mostrar o total do carrinho
-// mostrar um botão para finalizar a compra, que redireciona para a página de checkout

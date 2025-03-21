@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Cart;
 
+use App\Models\ProductOrder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -38,5 +39,12 @@ class Show extends Component
             ->where('po.order_id', $this->orderId)
             ->select('p.title', 'p.price', 'p.image')
             ->get();
+    }
+
+    #[Computed]
+    public function totalPrice(): int
+    {
+        return ProductOrder::where('order_id', $this->orderId)
+            ->sum('price');
     }
 }
