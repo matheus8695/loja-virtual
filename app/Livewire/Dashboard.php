@@ -6,12 +6,14 @@ use App\Models\{Category, Product};
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\{Builder, Collection};
 use Illuminate\Pagination\Paginator;
-use Livewire\Attributes\Computed;
+use Livewire\Attributes\{Computed};
 use Livewire\{Component, WithPagination};
+use Mary\Traits\Toast;
 
 class Dashboard extends Component
 {
     use WithPagination;
+    use Toast;
 
     public ?string $search = null;
 

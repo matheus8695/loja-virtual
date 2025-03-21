@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Enum\Status;
-use App\Models\{Order, Product, ProductOrder, User};
+use App\Models\{Order, Product, User};
 
 class OrderService
 {
@@ -11,7 +11,7 @@ class OrderService
     {
         $order = $this->getOrCreateOpenOder($user);
 
-        if (!$order->hasProduct($product->id)) {
+        if (!$order->products->contains($product->id)) {
             $this->createProductOrder($product, $order);
         }
 
@@ -28,11 +28,9 @@ class OrderService
 
     private function createProductOrder(Product $product, Order $order): void
     {
-        ProductOrder::query()->create([
-            'product_id' => $product->id,
-            'order_id'   => $order->id,
-            'quantity'   => 1,
-            'price'      => $product->price,
+        $order->products()->attach($product->id, [
+            'quantity' => 1,
+            'price'    => $product->price,
         ]);
     }
 }
