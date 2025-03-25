@@ -2,13 +2,11 @@
 
 namespace App\Livewire\Cart;
 
-use App\Models\ProductOrder;
+use App\Models\{Product, ProductOrder};
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
-use stdClass;
 
 class Show extends Component
 {
@@ -29,16 +27,14 @@ class Show extends Component
     }
 
     /**
-     * @return Collection<int, stdClass>
+     * @return Collection<int, Product>
      */
     #[Computed]
     public function products(): Collection
     {
-        return DB::table('products as p')
-            ->join('product_orders as po', 'po.product_id', '=', 'p.id')
-            ->where('po.order_id', $this->orderId)
-            ->select('p.title', 'p.price', 'p.image')
-            ->get();
+        return $this->orderId
+            ? Product::getByOrderId($this->orderId)
+            : collect();
     }
 
     #[Computed]

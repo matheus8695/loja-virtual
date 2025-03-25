@@ -23,7 +23,7 @@ class ProductOrder extends Pivot
     /**
      * @return BelongsTo<Order, $this>
      */
-    public function orders(): BelongsTo
+    public function order(): BelongsTo
     {
         return $this->BelongsTo(Order::class);
     }
@@ -31,7 +31,7 @@ class ProductOrder extends Pivot
     /**
      * @return BelongsTo<Product, $this>
      */
-    public function products(): BelongsTo
+    public function product(): BelongsTo
     {
         return $this->BelongsTo(Product::class);
     }

@@ -1,7 +1,8 @@
 <?php
 
-use App\Livewire\Order;
-use App\Models\User;
+use App\Enum\Status;
+use App\Livewire\Order\Index;
+use App\Models\{Order, Product, User};
 use Livewire\Livewire;
 
 use function Pest\Laravel\actingAs;
@@ -12,11 +13,33 @@ beforeEach(function () {
     actingAs($this->user);
 });
 
-// o componente deve estar rodando
-it('should access the componente finalize', function () {
-    Livewire::test(Order\Index::class)->assertOk();
+it('should access the componente', function () {
+    $product = Product::factory()->create();
+
+    $order = Order::factory()->create([
+        'user_id' => $this->user->id,
+        'status'  => Status::OPEN,
+    ]);
+
+    Livewire::withQueryParams(['orderId' => base64_encode($order->id)])
+        ->test(Index::class)->assertOk();
 });
 
-// mostrar os dados dos produtos do pedido
+it('should show the product data in screen', function () {
+    $product = Product::factory()->create();
 
-// quando aletrar a quantidade de produtos , deve salvar no banco e mudar alterar o preço do pedido
+    $order = Order::factory()->create([
+        'user_id' => $this->user->id,
+        'status'  => Status::OPEN,
+    ]);
+
+    $order->products()->attach($product->id, [
+        'quantity' => 1,
+        'price'    => $product->price,
+    ]);
+
+    Livewire::withQueryParams(['orderId' => base64_encode($order->id)])
+        ->test(Index::class)
+        ->assertSee(implode(' ', array_slice(explode(' ', $product->title), 0, 4)))
+        ->assertSee(number_format($product->price / 100, 2, ',', '.'));
+});
