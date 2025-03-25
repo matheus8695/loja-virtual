@@ -19,13 +19,17 @@ class Dashboard extends Component
 
     public ?int $searchByCategory = null;
 
+    public bool $hasOrder = false;
+
+    public bool $hasProductOrder = false;
+
     public function render(): View
     {
         return view('livewire.dashboard');
     }
 
     /**
-     * Métodos reativos são chamados automaticamente usando o padrão update + Nome_da_propriedade
+     * Métodos reativos são chamados automaticamente usando o padrão updated + Nome_da_propriedade
      */
     public function updatedSearch(): void
     {
@@ -33,7 +37,7 @@ class Dashboard extends Component
     }
 
     /**
-     * Métodos reativos são chamados automaticamente usando o padrão update + Nome_da_propriedade
+     * Métodos reativos são chamados automaticamente usando o padrão updated + Nome_da_propriedade
      */
     public function updatedSearchByCategory(): void
     {

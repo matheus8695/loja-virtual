@@ -47,4 +47,9 @@ class Index extends Component
     {
         $this->dispatch('order::delete', id: $id)->to('order.delete');
     }
+
+    public function purchase(int $id): void
+    {
+        $this->dispatch('order::purchase', id: $id)->to('order.purchase');
+    }
 }

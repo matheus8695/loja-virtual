@@ -41,9 +41,15 @@
         </div>
 
         <x-slot:actions>
-            <x-button label="Finalizar Compra" class="btn-primary"/>
+            <x-button 
+                label="Finalizar Compra" 
+                class="btn-primary" 
+                wire:key='purchase-{{ $order->id }}' 
+                wire:click='purchase({{ $order->id }})'
+            />
         </x-slot:actions>
     </x-card>
 
     <livewire:order.delete/>
+    <livewire:order.purchase>
 </div>
