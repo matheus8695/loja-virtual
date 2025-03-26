@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(StateSeeder::class);
+
         User::factory(10)
             ->has(Address::factory(), "addresses")
             ->create();

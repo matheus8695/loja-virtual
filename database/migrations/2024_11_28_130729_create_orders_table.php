@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\{DB, Schema};
+use Illuminate\Support\Facades\{Schema};
 
 return new class () extends Migration {
     /**
@@ -16,12 +16,10 @@ return new class () extends Migration {
             $table->string("status");
             $table->timestamps();
             $table->softDeletes();
+
+            $table->unique(['user_id', 'status'], 'unique_open_order_per_user');
         });
 
-        DB::statement('
-            CREATE UNIQUE INDEX unique_open_order_per_user ON orders (user_id)
-            WHERE status = "OPEN"
-        ');
     }
 
     /**
