@@ -21,11 +21,17 @@ class Dashboard extends Component
 
     public bool $hasOrder = false;
 
-    public bool $hasProductOrder = false;
-
     public function render(): View
     {
         return view('livewire.dashboard');
+    }
+
+    public function mount(): void
+    {
+        $this->hasOrder = auth()->user()
+            ->orders()
+            ->where('status', 'open')
+            ->exists();
     }
 
     /**

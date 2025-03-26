@@ -22,9 +22,7 @@ class Index extends Component
     {
         $encodeId = request('orderId');
 
-        $this->order = Order::query()
-            ->findOrFail(base64_decode($encodeId))
-            ->first();
+        $this->order = Order::findOrFail(base64_decode($encodeId));
     }
 
     /**

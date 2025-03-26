@@ -13,7 +13,9 @@
             </div>
         </div>
 
-        <livewire:cart.button/>
+        @if ($hasOrder)
+            <livewire:cart.button/>
+        @endif
     </div>
 
     <div class="bg-base-100 flex justify-around rounded-md">
