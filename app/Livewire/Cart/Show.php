@@ -30,7 +30,7 @@ class Show extends Component
      * @return Collection<int, Product>
      */
     #[Computed]
-    public function products(): Collection
+    public function products(): ?Collection
     {
         return $this->orderId
             ? Product::getByOrderId($this->orderId)
